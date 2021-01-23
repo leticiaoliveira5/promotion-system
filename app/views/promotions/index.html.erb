@@ -1,0 +1,11 @@
+
+<% @promotions.each do  |promotion| %>
+<dt>Nome:</dt>
+<dd><%= promotion.name %></dd>
+<dt>Descrição:</dt>
+<dd><%= promotion.description %></dd>
+<dt>Porcentagem:</dt>
+<dd><%= number_to_percentage promotion.discount_rate, precision:2, separator:',' %></dd>
+<% end %>
+
+<p> <%= link_to 'Voltar', root_path %>
