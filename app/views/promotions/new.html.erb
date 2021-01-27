@@ -1,0 +1,28 @@
+<%= form_for @promotion do |f| %>
+
+<%= f.label :name, 'Nome' %>  
+<%= f.text_field :name %> 
+<br>
+<%= f.label :description, 'Descrição' %>  
+<%= f.text_field :description %> 
+<br>
+<%= f.label :code, 'Código' %>  
+<%= f.text_field :code %> 
+<br>
+<%= f.label :discount_rate, 'Desconto' %>  
+<%= f.text_field :discount_rate %>  
+<br>
+<%= f.label :coupon_quantity, 'Quantidade de cupons' %>  
+<%= f.text_field :coupon_quantity %> 
+<br>
+<%= f.label :expiration_date, 'Data de término' %>  
+<%= f.text_field :expiration_date %> 
+<br>
+<%= f.submit 'Criar promoção' %>
+<% end %>
+
+<% flash.each do |type, msg| %>
+    <div>
+      <%= msg %>
+    </div>
+  <% end %>

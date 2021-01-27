@@ -1,0 +1,15 @@
+
+
+<dt>Nome</dt>
+<dd><%= @promotion.name %></dd>
+<dt>Descrição</dt>
+<dd><%= @promotion.description %></dd>
+<dt>Código</dt>
+<dd><%= @promotion.code %></dd>
+<dt>Desconto</dt>
+<dd><%= @promotion.discount_rate%>% </dd>
+<dt>Quantidade de cupons</dt>
+<dd><%= @promotion.coupon_quantity %></dd>
+<dt>Data de término</dt>
+<dd><%= @promotion.expiration_date %></dd>
+<%= link_to 'Voltar', root_path %>

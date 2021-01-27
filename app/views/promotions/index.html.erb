@@ -1,11 +1,13 @@
 
 <% @promotions.each do  |promotion| %>
 <dt>Nome:</dt>
-<dd><%= promotion.name %></dd>
+<dd>  <%= link_to promotion.name, promotion_path(promotion) %></dd>
 <dt>Descrição:</dt>
 <dd><%= promotion.description %></dd>
 <dt>Porcentagem:</dt>
 <dd><%= number_to_percentage promotion.discount_rate, precision:2, separator:',' %></dd>
 <% end %>
+
+<h3> <%= link_to 'Registrar uma promoção', new_promotion_path %> </h3>
 
 <p> <%= link_to 'Voltar', root_path %>
