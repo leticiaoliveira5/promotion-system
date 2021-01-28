@@ -1,4 +1,7 @@
-<%= form_for @promotion do |f| %>
+<h1>Nova Promoção</h1>
+<br>
+
+<%= form_with model: Promotion.new do |f| %>
 
 <%= f.label :name, 'Nome' %>  
 <%= f.text_field :name %> 
@@ -19,10 +22,6 @@
 <%= f.text_field :expiration_date %> 
 <br>
 <%= f.submit 'Criar promoção' %>
+
 <% end %>
 
-<% flash.each do |type, msg| %>
-    <div>
-      <%= msg %>
-    </div>
-  <% end %>

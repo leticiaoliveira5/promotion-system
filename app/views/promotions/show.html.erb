@@ -7,9 +7,9 @@
 <dt>Código</dt>
 <dd><%= @promotion.code %></dd>
 <dt>Desconto</dt>
-<dd><%= @promotion.discount_rate%>% </dd>
+<dd><%= number_to_percentage @promotion.discount_rate, precision:2, separator:',' %></dd>
 <dt>Quantidade de cupons</dt>
 <dd><%= @promotion.coupon_quantity %></dd>
 <dt>Data de término</dt>
-<dd><%= @promotion.expiration_date %></dd>
-<%= link_to 'Voltar', root_path %>
+<dd><%= @promotion.expiration_date.strftime("%d/%m/%Y") %></dd>
+<%= link_to 'Voltar', promotions_path %>
