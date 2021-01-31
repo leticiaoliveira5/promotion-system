@@ -14,4 +14,4 @@
 <dd><%= @promotion.expiration_date.strftime("%d/%m/%Y") %></dd>
 <p><%= link_to 'Voltar', promotions_path %>
 <p><%= link_to 'Editar promoção', edit_promotion_path %>
-<p><%= button_to "Apagar promoção", @promotion, :method => :delete %>
+<p><%= button_to 'Apagar promoção', @promotion, :method => :delete %>

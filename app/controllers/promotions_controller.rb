@@ -7,7 +7,6 @@ class PromotionsController < ApplicationController
     
     def new
         @promotion = Promotion.new
-        
     end
 
     def show

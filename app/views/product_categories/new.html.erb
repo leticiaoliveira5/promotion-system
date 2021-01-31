@@ -1,0 +1,28 @@
+<h1>Nova Categoria de Produto</h1>
+
+<% if @product_category.errors.any? %>
+    <div class="alert">
+        <p>Não foi possível criar a categoria</p>
+        <p>Confira os erros abaixo:</p>
+        <ul>
+            <% @product_category.errors.full_messages.each do |m| %>
+            <li><%= m %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<%= form_with(model: @product_category) do |f| %>
+  
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div> 
+  <div>
+    <%= f.label :code %>
+    <%= f.text_field :code %>
+  </div>
+
+  <%= f.submit 'Criar categoria' %>
+
+<% end %>
