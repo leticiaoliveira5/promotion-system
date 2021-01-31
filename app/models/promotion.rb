@@ -1,6 +1,6 @@
 class Promotion < ApplicationRecord
 
-    validates :name, :discount_rate, :coupon_quantity, :code, :expiration_date, presence: true
-
+    validates :name, :code, :discount_rate, :coupon_quantity, :expiration_date, presence: true 
+    validates :code, uniqueness: true 
 
 end
