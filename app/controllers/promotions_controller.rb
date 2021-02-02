@@ -1,6 +1,5 @@
 class PromotionsController < ApplicationController
 
-
     def index
         @promotions = Promotion.all 
     end
@@ -26,11 +25,9 @@ class PromotionsController < ApplicationController
         end
     end
     
-    
     def edit
         @promotion = Promotion.find(params[:id])
     end
-
 
     def update
         @promotion = Promotion.find(params[:id])
@@ -49,5 +46,13 @@ class PromotionsController < ApplicationController
         redirect_to promotions_path
     end
 
+    def generate_coupons
+        @promotion = Promotion.find(params[:id])
+        (1..@promotion.coupon_quantity).each do |number|
+        Coupon.create!(code: "#{@promotion.code}-#{'%04d' % number}", promotion: @promotion)
+        end
+        flash[:notice] = 'Cupons gerados com sucesso'
+        redirect_to @promotion
+    end
 
 end
