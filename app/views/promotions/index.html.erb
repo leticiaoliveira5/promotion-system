@@ -1,20 +1,24 @@
 
+<center>
 <h1>Promoções</h1>
 
 <% if @promotions.count < 1 %>
 <div class="warning"> 'Nenhuma promoção cadastrada' </div>
 <% else %>
-        <div><dl>
+        
         <% @promotions.each do  |promotion| %>
+        <div><dl>
         <dt>Nome:</dt>
         <dd>  <%= link_to promotion.name, promotion_path(promotion) %></dd>
         <dt>Descrição:</dt>
         <dd><%= promotion.description %></dd>
         <dt>Porcentagem:</dt>
         <dd><%= number_to_percentage promotion.discount_rate, precision:2, separator:',' %></dd>
-        <% end %>
         </dl></div>
+        <% end %>
+        
 <% end %>
 
 <h3> <%= link_to 'Registrar uma promoção', new_promotion_path %> </h3>
 <p> <%= link_to 'Voltar', root_path %>
+</center>

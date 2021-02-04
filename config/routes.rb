@@ -6,4 +6,8 @@ resources :promotions, only: %i[index show new create edit update destroy] do
 end
 resources :product_categories, only: %i[index new create edit show]
 
+resources :coupons, only: [] do
+  
+end
+
 end

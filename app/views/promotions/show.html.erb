@@ -1,5 +1,5 @@
-<% if flash[:notice].present? %>
-<div class="warning"><%= flash[:notice]%></div>
+<% if flash[:notice] %>
+<div><%= flash[:notice]%></div>
 <% end %>
 
 <dt>Nome</dt>
@@ -14,12 +14,22 @@
 <dd><%= @promotion.coupon_quantity %></dd>
 <dt>Data de término</dt>
 <dd><%= @promotion.expiration_date.strftime("%d/%m/%Y") %></dd>
+
 <p><%= link_to 'Voltar', promotions_path %>
-<p> <%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post %> </p>
 <p><%= link_to 'Editar promoção', edit_promotion_path %>
 <p><%= button_to 'Apagar promoção', @promotion, :method => :delete %>
 
 
+<% if @promotion.coupons.size == 0 %>
+<p><%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post %>
+<% end %>
+
+<% if @promotion.coupons.size > 0 %>
+<div>
+Cupons:
+<p>
 <% @promotion.coupons.each do |coupon| %>
-<p><%= coupon.code %>
-<%end%>
+<%= coupon.code %>,
+<% end %>
+</div>
+<% end %>

@@ -1,19 +1,17 @@
+<center>
 <h1>Categorias de produto</h1>
 
 <% if @product_categories.empty? %>
-<div class="warning"> 'Nenhuma categoria cadastrada' </div>
+        <div class="warning"> 'Nenhuma categoria cadastrada' </div>
 <% else %>
-        <div><dl>
+        <div>
         <% @product_categories.each do  |product_category| %>
-        <dt>Nome:</dt>
-        <dd>  <%= link_to product_category.name, product_category_path(product_category) %></dd>
-        <dt>Código:</dt>
-        <dd><%= product_category.code %></dd>
-        <p><%= link_to 'Editar categoria', edit_product_category_path(product_category) %>
+        <p><%= link_to "#{product_category.name} (#{product_category.code})", product_category_path(product_category) %>
         <% end %>
-        </dl></div>
+        </div>
 <% end %>
 
 <h3> <%= link_to 'Criar nova categoria', new_product_category_path %> </h3>
 
 <h3> <%= link_to 'Voltar', root_path %> </h3>
+</center>
