@@ -4,9 +4,12 @@ feature 'deletes promotion' do
 
     scenario 'deletes promotion and redirects to promotions page' do
 
+        user = User.create!(email: 'leticia@email.com', password: '123456')
+        login_as user, scope: :user
+
         @promotion = Promotion.create!(name: 'Páscoa', description: 'Promoção de Páscoa',
-                          code: 'PASCOA20', discount_rate: 20,
-                          coupon_quantity: 100, expiration_date: '22/12/2033')
+                          code: 'PASCOA20', discount_rate: 20, coupon_quantity: 100, 
+                          expiration_date: '22/12/2033', user: user)
     
         visit root_path
         click_on 'Promoções'

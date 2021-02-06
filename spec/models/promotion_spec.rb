@@ -4,16 +4,23 @@ describe Promotion do
 
   context 'validation' do
     it 'attributes cannot be blank' do
-      promotion = Promotion.new
+      user = User.create!(email: 'leticia@email.com', password: '123456')
+      login_as user, scope: :user
+
+      promotion = Promotion.new(user: user)
 
       expect(promotion.valid?).to eq false
       expect(promotion.errors.count).to eq 5
     end
 
     it 'description is optional' do
+
+      user = User.create!(email: 'leticia@email.com', password: '123456')
+      login_as user, scope: :user
+
       promotion = Promotion.new(name: 'Natal', description: '', code: 'NAT',
                                 coupon_quantity: 10, discount_rate: 10,
-                                expiration_date: '2021-10-10')
+                                expiration_date: '2021-10-10', user: user)
 
       expect(promotion.valid?).to eq true
     end
@@ -34,10 +41,14 @@ describe Promotion do
     end
 
     it 'code must be uniq' do
+      user = User.create!(email: 'leticia@email.com', password: '123456')
+      login_as user, scope: :user
+
       Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                         code: 'NATAL10', discount_rate: 10,
-                        coupon_quantity: 100, expiration_date: '22/12/2033')
-      promotion = Promotion.new(code: 'NATAL10')
+                        coupon_quantity: 100, expiration_date: '22/12/2033',
+                        user: user)
+      promotion = Promotion.new(code: 'NATAL10', user: user)
 
       promotion.valid?
 

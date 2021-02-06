@@ -1,5 +1,7 @@
 class PromotionsController < ApplicationController
 
+    before_action :authenticate_user!
+
     def index
         @promotions = Promotion.all 
     end
@@ -17,6 +19,7 @@ class PromotionsController < ApplicationController
         promotion_params = params.require(:promotion).permit(:name, 
         :description, :code, :discount_rate, :coupon_quantity, :expiration_date)
         @promotion = Promotion.new(promotion_params)
+        @promotion.user = current_user
         
         if @promotion.save
             redirect_to @promotion

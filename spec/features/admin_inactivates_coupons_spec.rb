@@ -3,9 +3,11 @@ require 'rails_helper'
 feature 'Admin inactivates coupon' do
    scenario 'successfully' do
 
+        user = User.create!(email: 'leticia@email.com', password: '123456')
+        login_as user, scope: :user
        promotion = Promotion.create!(name: 'ABC', description: 'Promoção ABC',
        code: 'ABC10', discount_rate: 10, coupon_quantity: 1,
-       expiration_date: '22/12/2025')
+       expiration_date: '22/12/2025', user: user)
        promotion.generate_coupons!
 
        visit root_path
@@ -20,10 +22,11 @@ feature 'Admin inactivates coupon' do
    end
 
    scenario 'does not view button when cupon inactive' do
-
+        user = User.create!(email: 'leticia@email.com', password: '123456')
+        login_as user, scope: :user
        promotion = Promotion.create!(name: 'DEF', description: 'Promoção DEF',
        code: 'DEF10', discount_rate: 10, coupon_quantity: 2,
-       expiration_date: '22/12/2025')
+       expiration_date: '22/12/2025', user: user)
        inactive_coupon = Coupon.create!(code: 'DEF10-0001', promotion: promotion, status: :inactive)
        active_coupon = Coupon.create!(code: 'DEF10-0002', promotion: promotion)
 

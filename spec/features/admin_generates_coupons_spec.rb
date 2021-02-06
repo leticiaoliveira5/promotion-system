@@ -3,10 +3,11 @@ require 'rails_helper'
 feature 'Admin generates coupons' do
 
     scenario 'of a promotion' do
-
+        user = User.create!(email: 'leticia@email.com', password: '123456')
+        login_as user, scope: :user
         @promotion = Promotion.create!(name: 'Páscoa', description: 'Promoção de Páscoa',
         code: 'PASCOA10', discount_rate: 10,
-        coupon_quantity: 100, expiration_date: '22/12/2033')
+        coupon_quantity: 100, expiration_date: '22/12/2033', user: user)
 
         visit root_path
         click_on 'Promoções'
@@ -23,10 +24,11 @@ feature 'Admin generates coupons' do
     end
 
     scenario 'hides button if coupons already generated' do
-
-    @promotion = Promotion.create!(name: 'Páscoa', description: 'Promoção de Páscoa',
+        user = User.create!(email: 'leticia@email.com', password: '123456')
+        login_as user, scope: :user
+        @promotion = Promotion.create!(name: 'Páscoa', description: 'Promoção de Páscoa',
         code: 'PASCOA10', discount_rate: 10,
-        coupon_quantity: 100, expiration_date: '22/12/2033')
+        coupon_quantity: 100, expiration_date: '22/12/2033', user: user)
 
         visit root_path
         click_on 'Promoções'

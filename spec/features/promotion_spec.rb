@@ -3,7 +3,11 @@ require 'rails_helper'
 describe Promotion do
   context 'validation' do
     it 'attributes cannot be blank' do
-      promotion = Promotion.new
+
+      user = User.create!(email: 'leticia@email.com', password: '123456')
+      login_as user, scope: :user
+
+      promotion = Promotion.new(user: user)
 
       promotion.valid?
 
@@ -18,10 +22,19 @@ describe Promotion do
     end
 
     it 'code must be uniq' do
-      Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                        code: 'NATAL10', discount_rate: 10,
-                        coupon_quantity: 100, expiration_date: '22/12/2033')
-      promotion = Promotion.new(code: 'NATAL10')
+
+      user = User.create!(email: 'leticia@email.com', password: '123456')
+      login_as user, scope: :user
+
+      Promotion.create!(name: 'Natal', 
+                        description: 'Promoção de Natal',
+                        code: 'NATAL10', 
+                        discount_rate: 10,
+                        coupon_quantity: 100, 
+                        expiration_date: '22/12/2033',
+                        user: user)
+      
+      promotion = Promotion.new(code: 'NATAL10', user: user)
 
       promotion.valid?
 
@@ -31,10 +44,17 @@ describe Promotion do
 
   context '#generate_coupons!' do
     it 'generate coupons of coupon_quantity' do
+
+      user = User.create!(email: 'leticia@email.com', password: '123456')
+      login_as user, scope: :user
+
       promotion = Promotion.create!(name: 'Dia dos Pais', 
                   description: 'Promoção de Dia dos Pais',
                   code: 'PAIS25', discount_rate: 25,
-                  coupon_quantity: 50, expiration_date: '22/07/2021')
+                  coupon_quantity: 50, 
+                  expiration_date: '22/07/2021',
+                  user: user)
+
       promotion.generate_coupons!
 
       expect(promotion.coupons.size).to eq(50)
@@ -48,9 +68,15 @@ describe Promotion do
   end
 
   it 'do not generate if error' do
+
+    user = User.create!(email: 'leticia@email.com', password: '123456')
+    login_as user, scope: :user
+
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                                   code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                                  expiration_date: '22/12/2033')
+                                  expiration_date: '22/12/2033',
+                                  user: user)
+
     promotion.coupons.create!(code: 'NATAL10-0030')
 
     expect { promotion.generate_coupons! }.to raise_error(ActiveRecord::RecordNotUnique)
