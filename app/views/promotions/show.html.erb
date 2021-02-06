@@ -1,4 +1,7 @@
 <center>
+
+<h1>Detalhes da Promoção</h1>
+
 <% if flash[:notice] %>
 <div><%= flash[:notice]%></div>
 <% end %>
@@ -27,15 +30,19 @@
 
 <% if @promotion.coupons? %>
 <div>
-Cupons:
+<h3>Cupons:</h3>
 <p>
 <% @promotion.coupons.each do |coupon| %>
-<%= coupon.code %>
-<% if coupon.inactive?  %>
-(Inativo)
+    
+    <%= coupon.code %> (<%= t(".#{coupon.status}") %>)
+   
+    <% if coupon.active?  %>
+    <%= link_to 'Inativar cupom', inactivate_coupon_path(coupon), method: :post %>
+    <% end %>
+    <br>
+
 <% end %>
-<%= link_to 'Inativar cupon', inactivate_coupon_path(coupon), method: :post %>
-<% end %>
+
 </div>
 <% end %>
 </center>
