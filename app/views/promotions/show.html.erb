@@ -1,3 +1,4 @@
+<center>
 <% if flash[:notice] %>
 <div><%= flash[:notice]%></div>
 <% end %>
@@ -24,12 +25,17 @@
 <p><%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post %>
 <% end %>
 
-<% if @promotion.coupons.size > 0 %>
+<% if @promotion.coupons? %>
 <div>
 Cupons:
 <p>
 <% @promotion.coupons.each do |coupon| %>
-<%= coupon.code %>,
+<%= coupon.code %>
+<% if coupon.inactive?  %>
+(Inativo)
+<% end %>
+<%= link_to 'Inativar cupon', inactivate_coupon_path(coupon), method: :post %>
 <% end %>
 </div>
 <% end %>
+</center>

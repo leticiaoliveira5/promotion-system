@@ -9,6 +9,9 @@ class Promotion < ApplicationRecord
             coupons.create!(code: "#{code}-#{'%04d' % number}")
           end
         end
-      end
+    end
 
+    def coupons?
+      coupons.any?
+    end
 end
