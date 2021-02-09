@@ -7,7 +7,14 @@ devise_for :users
 
 resources :promotions, only: %i[index show new create edit update destroy] do
   post 'generate_coupons', on: :member
+
+  member do
+    post 'generate_coupons'
+    post 'approve'
+  end
+
 end
+
 resources :product_categories, only: %i[index new create edit show]
 
 resources :coupons, only: [] do

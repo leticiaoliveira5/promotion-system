@@ -7,6 +7,10 @@
 <% end %>
 <span>Cadastrada por <%= @promotion.user.email %></span>
 
+  <% if @promotion.approved? %>
+<span> Aprovada por <% @promotion.approver.email %> </span>
+  <% end %> 
+
 <dt>Nome</dt>
 <dd><%= @promotion.name %></dd>
 <dt>Descrição</dt>
@@ -20,10 +24,12 @@
 <dt>Data de término</dt>
 <dd><%= @promotion.expiration_date.strftime("%d/%m/%Y") %></dd>
 
-
-<p><%= link_to 'Voltar', promotions_path %>
+<% if current_user != @promotion.user %>
+<p> <%= link_to 'Aprovar Promoção', approve_promotion_path, method: :post %>
+<% end %>
 <p><%= link_to 'Editar promoção', edit_promotion_path %>
 <p><%= button_to 'Apagar promoção', @promotion, :method => :delete %>
+<p><%= link_to 'Voltar', promotions_path %>
 
 
 <% if @promotion.coupons.size == 0 %>

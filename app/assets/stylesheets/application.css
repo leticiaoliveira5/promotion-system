@@ -30,11 +30,23 @@
     font-family: Verdana,sans-serif;
  }
 
+ a { 
+  font-family: Verdana,sans-serif;
+  color: darkseagreen;
+  text-decoration: none;
+
+ }
+
+ a:hover {
+   background-color: whitesmoke;
+   font-weight: bold;
+ }
+
  table {
     }
 
   th {
-    background-color: black;
+    background-color: whitesmoke;
     padding: 15px;
     text-align: left;
     color: white;
