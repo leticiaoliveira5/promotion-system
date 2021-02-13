@@ -4,14 +4,19 @@ feature 'Admin generates coupons' do
 
     scenario 'of a promotion' do
         user = User.create!(email: 'leticia@email.com', password: '123456')
-        login_as user, scope: :user
-        @promotion = Promotion.create!(name: 'Páscoa', description: 'Promoção de Páscoa',
-        code: 'PASCOA10', discount_rate: 10,
-        coupon_quantity: 100, expiration_date: '22/12/2033', user: user)
-
-        visit root_path
-        click_on 'Promoções'
-        click_on 'Páscoa'
+        @promotion = Promotion.create!(name: 'Páscoa', 
+                                description: 'Promoção de Páscoa',
+                                code: 'PASCOA10', 
+                                discount_rate: 10,
+                                coupon_quantity: 100, 
+                                expiration_date: '22/12/2033', 
+                                user: user)
+        
+        approval_user = User.create!(email: 'maria@email.com', password: '123456')
+    
+        login_as approval_user, scope: :user
+        visit promotion_path(@promotion)
+        click_on 'Aprovar Promoção'
         click_on 'Gerar cupons'
 
         expect(current_path).to eq(promotion_path(@promotion))
@@ -23,12 +28,20 @@ feature 'Admin generates coupons' do
 
     end
 
-    scenario 'hides button if coupons already generated' do
+    scenario 'and hides button if coupons already generated' do
         user = User.create!(email: 'leticia@email.com', password: '123456')
-        login_as user, scope: :user
-        @promotion = Promotion.create!(name: 'Páscoa', description: 'Promoção de Páscoa',
-        code: 'PASCOA10', discount_rate: 10,
-        coupon_quantity: 100, expiration_date: '22/12/2033', user: user)
+        @promotion = Promotion.create!(name: 'Páscoa', 
+                                    description: 'Promoção de Páscoa',
+                                    code: 'PASCOA10', 
+                                    discount_rate: 10,
+                                    coupon_quantity: 100, 
+                                    expiration_date: '22/12/2033', 
+                                    user: user)
+
+        approval_user = User.create!(email: 'maria@email.com', password: '123456')
+        login_as approval_user, scope: :user
+        visit promotion_path(@promotion)
+        click_on 'Aprovar Promoção'
 
         visit root_path
         click_on 'Promoções'

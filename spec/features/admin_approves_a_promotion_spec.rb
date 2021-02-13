@@ -41,9 +41,13 @@ feature 'Admin approves a promotion' do
 
   scenario 'successfully' do
     creator = User.create!(email: 'leticia@email.com', password: '123456')
-    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                      expiration_date: '22/12/2033', user: creator)
+    promotion = Promotion.create!(name: 'Natal', 
+                      description: 'Promoção de Natal',
+                      code: 'NATAL10', 
+                      discount_rate: 10, 
+                      coupon_quantity: 100,
+                      expiration_date: '22/12/2033', 
+                      user: creator)
     approval_user = User.create!(email: 'henrique@email.com', password: '123456')
 
     login_as approval_user, scope: :user
@@ -54,7 +58,7 @@ feature 'Admin approves a promotion' do
     expect(current_path).to eq promotion_path(promotion)
     expect(promotion.approved?).to be_truthy
     expect(promotion.approver).to eq approval_user
-    expect(page).to have_content("Aprovada por #{creator.email}")
+    expect(page).to have_content("Aprovada por #{approval_user.email}")
   end
 
 end 

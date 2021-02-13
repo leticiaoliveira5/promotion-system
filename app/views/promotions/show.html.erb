@@ -5,10 +5,9 @@
 <% if flash[:notice] %>
 <div><%= flash[:notice]%></div>
 <% end %>
-<span>Cadastrada por <%= @promotion.user.email %></span>
-
+<p>Cadastrada por <%= @promotion.user.email %></p>
   <% if @promotion.approved? %>
-<span> Aprovada por <% @promotion.approver.email %> </span>
+<p> Aprovada por <%= @promotion.approver.email %> </p>
   <% end %> 
 
 <dt>Nome</dt>
@@ -32,9 +31,10 @@
 <p><%= link_to 'Voltar', promotions_path %>
 
 
-<% if @promotion.coupons.size == 0 %>
+<% if @promotion.approved? && @promotion.coupons.size == 0 %>
 <p><%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post %>
 <% end %>
+
 
 <% if @promotion.coupons? %>
 <div>
