@@ -1,4 +1,5 @@
-<h1> Editar Promoção </h1>
+<center>
+<h2> Editar Promoção </h2>
 
 <%= form_for(@promotion) do |f| %>
   <div>
@@ -15,7 +16,7 @@
     <%= f.text_field :code %>
   </div>
   <div>
-    <%= f.label @promotion[:discount_rate] %>
+    <%= f.label :discount_rate %>
     <%= f.text_field :discount_rate %>
   </div>
   <div>
@@ -26,5 +27,8 @@
     <%= f.label :expiration_date %>
     <%= f.text_field :expiration_date %>
   </div>
+ 
   <%= f.submit 'Salvar mudanças' %>
 <% end %>
+
+</center>

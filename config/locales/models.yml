@@ -21,5 +21,6 @@ pt-BR:
         coupon_quantity: "Quantidade de cupons"
         expiration_date: "Data de término"
         description: "Descrição"
+        product_category: "Categoria(s) de produto"
       coupon:
         code: Código

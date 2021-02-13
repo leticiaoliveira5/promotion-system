@@ -1,4 +1,6 @@
-<center><h1>Nova Promoção</h1>
+<center>
+<h1>Nova Promoção</h1>
+
 <% if @promotion.errors.any? %>
   <div class="alert">
     <p>Não foi possível criar a promoção</p>
@@ -10,6 +12,7 @@
     </ul>
   </div>
 <% end %>
+
 <%= form_with(model: @promotion) do |f| %>
   <div>
     <%= f.label :name %>
@@ -36,6 +39,12 @@
     <%= f.label :expiration_date %>
     <%= f.text_field :expiration_date %>
   </div>
+
+  <div>
+    <%= f.label :product_category %>
+    <%= f.collection_check_boxes :product_category_ids, @product_categories, :id, :name %>
+  </div>
+
   <%= f.submit 'Criar promoção' %>
 <% end %>
 <p><%= link_to 'Voltar', promotions_path %>

@@ -12,8 +12,8 @@
   <body>
   <nav>
   <%= link_to 'Página inicial', root_path %>
-  <%= link_to 'Entrar', new_user_session_path %>
   <% unless user_signed_in? %>
+  <%= link_to 'Entrar', new_user_session_path %>
   <%= link_to 'Cadastrar novo usuário', new_user_registration_path %>
   <% end %>
   <% if user_signed_in? %>

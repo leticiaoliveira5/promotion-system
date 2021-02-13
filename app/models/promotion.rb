@@ -1,7 +1,10 @@
 class Promotion < ApplicationRecord
-    has_many :coupons
     belongs_to :user
-    has_one :promotion_approval
+    has_many :coupons, dependent: :destroy
+    has_one :promotion_approval, dependent: :destroy
+    has_many :product_category_promotions
+    has_many :product_categories, through: :product_category_promotions
+
     validates :name, :code, :discount_rate, :coupon_quantity, :expiration_date, presence: true 
     validates :code, uniqueness: true 
 
@@ -36,5 +39,5 @@ class Promotion < ApplicationRecord
       promotion_approval.user
     end
 
-
+ 
 end

@@ -19,6 +19,7 @@ resources :product_categories, only: %i[index new create edit show]
 
 resources :coupons, only: [] do
   post 'inactivate', on: :member
+  post 'activate', on: :member
 end
 
 end

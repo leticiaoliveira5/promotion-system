@@ -10,6 +10,8 @@
 <p> Aprovada por <%= @promotion.approver.email %> </p>
   <% end %> 
 
+<div>
+
 <dt>Nome</dt>
 <dd><%= @promotion.name %></dd>
 <dt>Descrição</dt>
@@ -22,19 +24,27 @@
 <dd><%= @promotion.coupon_quantity %></dd>
 <dt>Data de término</dt>
 <dd><%= @promotion.expiration_date.strftime("%d/%m/%Y") %></dd>
+<dt>Categoria(s) de produto</dt>
+<dd><% @promotion.product_categories.each do |pc| %>
+<%= pc.name %>
+<% end %></dd>
 
+</div>
+
+<div>
+<% unless @promotion.approved? %>
 <% if current_user != @promotion.user %>
-<p> <%= link_to 'Aprovar Promoção', approve_promotion_path, method: :post %>
+<%= link_to 'Aprovar Promoção', approve_promotion_path, method: :post %>
+<% end %> 
 <% end %>
-<p><%= link_to 'Editar promoção', edit_promotion_path %>
-<p><%= button_to 'Apagar promoção', @promotion, :method => :delete %>
-<p><%= link_to 'Voltar', promotions_path %>
-
-
+<%= link_to 'Editar promoção', edit_promotion_path(@promotion) %>
+<%= link_to 'Apagar promoção', @promotion, method: :delete %>
+<%= link_to 'Voltar', promotions_path %>
 <% if @promotion.approved? && @promotion.coupons.size == 0 %>
 <p><%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post %>
 <% end %>
 
+</div>
 
 <% if @promotion.coupons? %>
 <div>
@@ -46,11 +56,12 @@
    
     <% if coupon.active?  %>
     <%= link_to 'Inativar cupom', inactivate_coupon_path(coupon), method: :post %>
+    <% else %>
+    <%= link_to 'Ativar cupom novamente', activate_coupon_path(coupon), method: :post %>
     <% end %>
     <br>
 
 <% end %>
-
 </div>
 <% end %>
 </center>
