@@ -8,7 +8,10 @@
 <p>Cadastrada por <%= @promotion.user.email %></p>
   <% if @promotion.approved? %>
 <p> Aprovada por <%= @promotion.approver.email %> </p>
+  <% else %>
+<p> Esta promoção ainda não foi aprovada</p>  
   <% end %> 
+
 
 <div>
 
@@ -52,7 +55,7 @@
 <p>
 <% @promotion.coupons.each do |coupon| %>
     
-    <%= coupon.code %> (<%= t(".#{coupon.status}") %>)
+    <%= link_to coupon.code, coupon_path(coupon.id) %> (<%= t(".#{coupon.status}") %>)
    
     <% if coupon.active?  %>
     <%= link_to 'Inativar cupom', inactivate_coupon_path(coupon), method: :post %>

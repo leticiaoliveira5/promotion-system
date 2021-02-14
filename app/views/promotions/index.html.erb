@@ -1,12 +1,11 @@
 
 <center>
-<h1>Promoções</h1>
-
+<h2>Promoções</h2>
 
 <% if @promotions.count < 1 %>
 <div class="warning"> 'Nenhuma promoção cadastrada' </div>
 <% else %>
-        
+        <div>
         <table><th>Nome</th> <th>Descrição</th> <th>Porcentagem</th>
         <% @promotions.each do  |promotion| %> 
         <tr> 
@@ -16,6 +15,7 @@
         </tr>
         <% end %>
         </table>
+        </div>
 
 <% end %>
 
