@@ -22,6 +22,14 @@
   background-color: whitesmoke;
 }
 
+.alert {
+ color: red
+}
+
+.notice{
+  color:red
+}
+
 div {
   padding:5px;
 }

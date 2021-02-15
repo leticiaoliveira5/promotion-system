@@ -3,7 +3,9 @@ class PromotionsController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @promotions = Promotion.all 
+
+         @promotions = Promotion.search(params[:search])
+    
     end
     
     def new
@@ -23,6 +25,7 @@ class PromotionsController < ApplicationController
                                 :discount_rate, 
                                 :coupon_quantity, 
                                 :expiration_date, 
+                                :search,
                                 product_category_ids: [])
 
         @promotion = Promotion.new(promotion_params)

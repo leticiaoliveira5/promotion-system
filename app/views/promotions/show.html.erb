@@ -12,7 +12,6 @@
 <p> Esta promoção ainda não foi aprovada</p>  
   <% end %> 
 
-
 <div>
 
 <dt>Nome</dt>
@@ -35,11 +34,13 @@
 </div>
 
 <div>
+
 <% unless @promotion.approved? %>
-<% if current_user != @promotion.user %>
-<%= link_to 'Aprovar Promoção', approve_promotion_path, method: :post %>
-<% end %> 
+  <% if current_user != @promotion.user %>
+    <%= link_to 'Aprovar Promoção', approve_promotion_path, method: :post %>
+  <% end %> 
 <% end %>
+
 <%= link_to 'Editar promoção', edit_promotion_path(@promotion) %>
 <%= link_to 'Apagar promoção', @promotion, method: :delete %>
 <%= link_to 'Voltar', promotions_path %>
@@ -47,24 +48,20 @@
 <p><%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post %>
 <% end %>
 
+<% unless @promotion.coupons? %>
+<p>Esta promoção ainda não tem cupons</p>
+<% end %>
+
 </div>
 
 <% if @promotion.coupons? %>
+
 <div>
 <h3>Cupons:</h3>
-<p>
 <% @promotion.coupons.each do |coupon| %>
-    
-    <%= link_to coupon.code, coupon_path(coupon.id) %> (<%= t(".#{coupon.status}") %>)
-   
-    <% if coupon.active?  %>
-    <%= link_to 'Inativar cupom', inactivate_coupon_path(coupon), method: :post %>
-    <% else %>
-    <%= link_to 'Ativar cupom novamente', activate_coupon_path(coupon), method: :post %>
-    <% end %>
-    <br>
-
+<%= link_to coupon.code, coupon_path(coupon.id) %> (<%= t(".#{coupon.status}") %>)
 <% end %>
 </div>
+
 <% end %>
 </center>

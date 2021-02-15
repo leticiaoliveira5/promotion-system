@@ -1,23 +1,37 @@
 
 <center>
-<h2>Promoções</h2>
+<h1>Promoções</h1>
 
-<% if @promotions.count < 1 %>
+<div id="promotion_search">
+<h3>Buscar promoção:</h3>
+<%= form_tag promotions_path, method: :get do |f| %>
+  <%= label_tag :search, "Buscar por nome" %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag("Buscar promoção", :name => nil) %>
+<% end %>
+</div>
+
+<% if @promotions.count == 0 %>
 <div class="warning"> 'Nenhuma promoção cadastrada' </div>
 <% else %>
         <div>
-        <table><th>Nome</th> <th>Descrição</th> <th>Porcentagem</th>
         <% @promotions.each do  |promotion| %> 
-        <tr> 
-        <td><%= link_to promotion.name, promotion_path(promotion) %></td>
-        <td><%= promotion.description %></td>
-        <td><%= number_to_percentage promotion.discount_rate, precision:2, separator:',' %></td>
-        </tr>
+        <h3>Nome: <%= link_to promotion.name, promotion_path(promotion) %></h3>
+        <h4>Descrição: <%= promotion.description %></h4>
+        <h4>Porcentagem: <%= number_to_percentage promotion.discount_rate, precision:2, separator:',' %></h4>
         <% end %>
-        </table>
         </div>
 
 <% end %>
+
+<div id="coupon_search">
+<h3>Buscar Cupom:</h3>
+<%= form_tag(coupon_search_path(:code), method: :get) do |f| %>
+  <%= label_tag :code, "Código" %>
+  <%= text_field_tag :code, params[:code] %>
+  <%= submit_tag "Buscar cupom" %>
+<% end %>
+</div>
 
 <h3> <%= link_to 'Registrar uma promoção', new_promotion_path %> </h3>
 <p> <%= link_to 'Voltar', root_path %>

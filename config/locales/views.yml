@@ -3,3 +3,9 @@ pt-BR:
     show:
       active: 'Ativo'
       inactive: 'Inativo'
+      code: 'Código'
+  coupons:
+    show:
+      active: 'Ativo'
+      inactive: 'Inativo'
+      code: 'Código'

@@ -1,5 +1,10 @@
 <center><h2>Informações do cupom</h2>
 <p>Código: <%= @coupon.code %> 
-<p>Status: (<%= t(".#{@coupon.status}") %>)
+<p>Status: <%= t(".#{@coupon.status}") %>
+ <% if @coupon.active?  %>
+   <p> <%= link_to 'Inativar cupom', inactivate_coupon_path(@coupon), method: :post %>
+    <% else %>
+   <p> <%= link_to 'Ativar cupom novamente', activate_coupon_path(@coupon), method: :post %>
+    <% end %>
 <p>Promoção: <%= link_to @coupon.promotion.name, promotion_path(@coupon.promotion) %>
 </center>

@@ -38,6 +38,15 @@ class Promotion < ApplicationRecord
     def approver
       promotion_approval.user
     end
-
+    
+    def self.search(search)
+      if search
+          self.where("name LIKE ?","%#{search}%")
+          # sintaxe SQL para buscas no banco de dados
+          # Like procura o texto independente da posição na string
+      else
+          @promotions = Promotion.all
+      end
+    end
  
 end

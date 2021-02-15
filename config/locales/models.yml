@@ -24,3 +24,5 @@ pt-BR:
         product_category: "Categoria(s) de produto"
       coupon:
         code: Código
+        active: Ativo
+        inactive: Inativo
