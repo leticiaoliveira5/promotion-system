@@ -40,14 +40,14 @@ feature 'Admin approves a promotion' do
   end
 
   scenario 'successfully' do
-    creator = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     promotion = Promotion.create!(name: 'Natal', 
                       description: 'Promoção de Natal',
                       code: 'NATAL10', 
                       discount_rate: 10, 
                       coupon_quantity: 100,
                       expiration_date: '22/12/2033', 
-                      user: creator)
+                      user: user)
     approval_user = User.create!(email: 'henrique@email.com', password: '123456')
 
     login_as approval_user, scope: :user

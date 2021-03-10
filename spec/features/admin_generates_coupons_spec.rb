@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Admin generates coupons' do
 
     scenario 'of a promotion' do
-        user = User.create!(email: 'leticia@email.com', password: '123456')
+        user = create(:user)
         @promotion = Promotion.create!(name: 'Páscoa', 
                                 description: 'Promoção de Páscoa',
                                 code: 'PASCOA10', 
@@ -29,7 +29,7 @@ feature 'Admin generates coupons' do
     end
 
     scenario 'and hides button if coupons already generated' do
-        user = User.create!(email: 'leticia@email.com', password: '123456')
+        user = create(:user)
         @promotion = Promotion.create!(name: 'Páscoa', 
                                     description: 'Promoção de Páscoa',
                                     code: 'PASCOA10', 

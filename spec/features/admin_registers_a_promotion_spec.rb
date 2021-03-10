@@ -4,7 +4,7 @@ feature 'Admin registers a promotion' do
 
   scenario 'from index page' do
 
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
     visit root_path
     click_on 'Promoções'
@@ -15,7 +15,7 @@ feature 'Admin registers a promotion' do
 
   scenario 'successfully' do
 
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
     visit root_path
     click_on 'Promoções'
@@ -43,7 +43,7 @@ feature 'Admin registers a promotion' do
 
   scenario 'and choose product categories' do
 
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
 
     ProductCategory.create!(name: 'Smartphones', code: 'SMARTPHONE')

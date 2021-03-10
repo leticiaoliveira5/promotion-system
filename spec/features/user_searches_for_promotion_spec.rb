@@ -4,7 +4,7 @@ feature 'User searches for promotions' do
 
     scenario 'successfully' do
        
-        user = User.create!(email: 'leticia@email.com', password: '123456')
+        user = create(:user)
         login_as user, scope: :user
         pc= ProductCategory.create!(name: 'Cristais', code: 'CRYSTAL')
         promotion = Promotion.create!(name: 'XYZ', 

@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Admin view promotions' do
   scenario 'successfully' do
 
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
 
     Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
@@ -27,7 +27,7 @@ feature 'Admin view promotions' do
 
   scenario 'and view details' do
 
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
 
     Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
@@ -53,7 +53,7 @@ feature 'Admin view promotions' do
 
   scenario 'and no promotion are created' do
     visit root_path
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
     click_on 'Promoções'
 
@@ -61,11 +61,9 @@ feature 'Admin view promotions' do
   end
 
   scenario 'and return to home page' do
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
-    Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                      expiration_date: '22/12/2033', user: user)
+    promotion = create(:promotion, name: 'ABC', user: user)
 
     visit root_path
     click_on 'Promoções'
@@ -75,15 +73,13 @@ feature 'Admin view promotions' do
   end
 
   scenario 'and return to promotions page' do
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
-    Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                      expiration_date: '22/12/2033', user: user)
+    promotion = create(:promotion, name: 'ABC', user: user)
 
     visit root_path
     click_on 'Promoções'
-    click_on 'Natal'
+    click_on 'ABC'
     click_on 'Voltar'
 
     expect(current_path).to eq promotions_path

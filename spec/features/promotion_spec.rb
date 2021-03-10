@@ -4,7 +4,7 @@ describe Promotion do
   context 'validation' do
     it 'attributes cannot be blank' do
 
-      user = User.create!(email: 'leticia@email.com', password: '123456')
+      user = create(:user)
       login_as user, scope: :user
 
       promotion = Promotion.new(user: user)
@@ -23,7 +23,7 @@ describe Promotion do
 
     it 'code must be uniq' do
 
-      user = User.create!(email: 'leticia@email.com', password: '123456')
+      user = create(:user)
       login_as user, scope: :user
 
       Promotion.create!(name: 'Natal', 
@@ -45,7 +45,7 @@ describe Promotion do
   context '#generate_coupons!' do
     it 'generate coupons of coupon_quantity' do
 
-      user = User.create!(email: 'leticia@email.com', password: '123456')
+      user = create(:user)
       login_as user, scope: :user
 
       promotion = Promotion.create!(name: 'Dia dos Pais', 
@@ -69,7 +69,7 @@ describe Promotion do
 
   it 'do not generate if error' do
 
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
 
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',

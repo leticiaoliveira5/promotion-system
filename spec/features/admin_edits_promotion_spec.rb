@@ -23,7 +23,7 @@ feature 'edits promotion' do
 
    scenario 'saves changes and redirects to promotion page' do
 
-    user = User.create!(email: 'leticia@email.com', password: '123456')
+    user = create(:user)
     login_as user, scope: :user
 
     @promotion = Promotion.create!(name: 'Páscoa', description: 'Promoção de Páscoa',

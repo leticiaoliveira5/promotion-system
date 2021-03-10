@@ -6,12 +6,8 @@ feature 'Admin inactivates coupon' do
    scenario 'successfully' do
 
       user = create(:user)
-      #user = User.create!(email: 'leticia@email.com', password: '123456')
       login_as user, scope: :user
       promotion = create(:promotion, name: 'ABC', user: user)
-      #promotion = Promotion.create!(name: 'ABC', description: 'Promoção ABC',
-      #code: 'ABC10', discount_rate: 10, coupon_quantity: 1,
-      #expiration_date: '22/12/2025', user: user)
       promotion.generate_coupons!
 
       visit root_path
@@ -29,12 +25,8 @@ feature 'Admin inactivates coupon' do
    scenario 'and activates coupon again' do
 
       user = create(:user)
-      #user = User.create!(email: 'leticia@email.com', password: '123456')
       login_as user, scope: :user
       promotion = create(:promotion, name: 'ABC', user: user)
-      #promotion = Promotion.create!(name: 'GHI', description: 'Promoção GHI',
-      #code: 'GHI10', discount_rate: 10, coupon_quantity: 2,
-      #expiration_date: '22/12/2025', user: user)
       inactive_coupon = Coupon.create!(code: 'GHI10-0001', promotion: promotion, status: :inactive)
       active_coupon = Coupon.create!(code: 'GHI10-0002', promotion: promotion)
 
