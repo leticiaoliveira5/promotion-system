@@ -1,27 +1,25 @@
 Rails.application.routes.draw do
-# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-root 'home#index'
+  root 'home#index'
 
-devise_for :users
+  devise_for :users
 
-resources :promotions, only: %i[index show new create edit update destroy] do
-  post 'generate_coupons', on: :member
+  resources :promotions, only: %i[index show new create edit update destroy] do
+    post 'generate_coupons', on: :member
 
-  member do
-    post 'generate_coupons'
-    post 'approve'
+    member do
+      post 'generate_coupons'
+      post 'approve'
+    end
   end
 
-end
+  resources :product_categories, only: %i[index new create edit show]
 
-resources :product_categories, only: %i[index new create edit show]
-
-resources :coupons, only: %i[show] do
-  post 'inactivate', on: :member
-  post 'activate', on: :member
-  get 'search', to: 'coupons#search'
-  get 'search/:code', action: 'search'
-end
-
+  resources :coupons, only: %i[show] do
+    post 'inactivate', on: :member
+    post 'activate', on: :member
+    get 'search', to: 'coupons#search'
+    get 'search/:code', action: 'search'
+  end
 end

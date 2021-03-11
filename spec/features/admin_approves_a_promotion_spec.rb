@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 feature 'Admin approves a promotion' do
-
   scenario 'and must be signed in' do
     user = create(:user)
     promotion = create(:promotion, user: user)
@@ -57,5 +56,4 @@ feature 'Admin approves a promotion' do
     expect(promotion.approver).to eq approval_user
     expect(page).to have_content("Aprovada por #{approval_user.email}")
   end
-
-end 
+end

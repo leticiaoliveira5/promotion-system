@@ -1,5 +1,4 @@
 class CouponsController < ApplicationController
-
   before_action :authenticate_user!
 
   def show
@@ -25,9 +24,9 @@ class CouponsController < ApplicationController
   def search
     coupon = Coupon.find_by(code: params[:code])
     if coupon.present?
-    redirect_to coupon_path(coupon.id)
+      redirect_to coupon_path(coupon.id)
     else
-    redirect_to promotions_path, notice: "O cupom não foi encontrado"
+      redirect_to promotions_path, notice: 'O cupom não foi encontrado'
     end
   end
 end

@@ -22,11 +22,9 @@ feature 'Admin registers a valid promotion' do
     expect(page).to have_content('Desconto não pode ficar em branco')
     expect(page).to have_content('Quantidade de cupons não pode ficar em branco')
     expect(page).to have_content('Data de término não pode ficar em branco')
-
   end
 
   scenario 'and code must be unique' do
-
     user = create(:user)
     login_as user, scope: :user
     promotion = create(:promotion, name: 'ABC', user: user)

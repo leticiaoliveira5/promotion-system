@@ -7,8 +7,6 @@ class PromotionApproval < ApplicationRecord
   private
 
   def different_user
-    if promotion && promotion.user == user #curto circuito
-      errors.add(:user, 'não pode ser o criador da promoção')
-    end
-  end 
+    errors.add(:user, 'não pode ser o criador da promoção') if promotion && promotion.user == user # curto circuito
+  end
 end

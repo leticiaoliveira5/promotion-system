@@ -16,11 +16,11 @@ describe Promotion do
 
     it 'code must be uniq' do
       user = create(:user)
-      Promotion.create!(name: 'Natal', 
+      Promotion.create!(name: 'Natal',
                         description: 'Promoção de Natal',
-                        code: 'NATAL10', 
+                        code: 'NATAL10',
                         discount_rate: 10,
-                        coupon_quantity: 100, 
+                        coupon_quantity: 100,
                         expiration_date: '22/12/2033',
                         user: user)
       promotion = Promotion.new(code: 'NATAL10', user: user)
@@ -33,20 +33,20 @@ describe Promotion do
     it 'generate coupons of coupon_quantity' do
       user = create(:user)
       login_as user, scope: :user
-      promotion = Promotion.create!(name: 'Dia dos Pais', 
-                  description: 'Promoção de Dia dos Pais',
-                  code: 'PAIS25', discount_rate: 25,
-                  coupon_quantity: 50, 
-                  expiration_date: '22/07/2021',
-                  user: user)
+      promotion = Promotion.create!(name: 'Dia dos Pais',
+                                    description: 'Promoção de Dia dos Pais',
+                                    code: 'PAIS25', discount_rate: 25,
+                                    coupon_quantity: 50,
+                                    expiration_date: '22/07/2021',
+                                    user: user)
       promotion.generate_coupons!
 
       expect(promotion.coupons.size).to eq(50)
       codes = promotion.coupons.pluck(:code)
-      expect(codes).to include("PAIS25-0001")
-      expect(codes).to include("PAIS25-0010")
-      expect(codes).to include("PAIS25-0050")
-      expect(codes).not_to include("PAIS25-0051")
+      expect(codes).to include('PAIS25-0001')
+      expect(codes).to include('PAIS25-0010')
+      expect(codes).to include('PAIS25-0050')
+      expect(codes).not_to include('PAIS25-0051')
     end
   end
 

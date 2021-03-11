@@ -7,7 +7,7 @@ feature 'Admin registers a promotion' do
     visit root_path
     click_on 'Promoções'
 
-    expect(page).to have_link('Registrar uma promoção', href: new_promotion_path)    
+    expect(page).to have_link('Registrar uma promoção', href: new_promotion_path)
   end
 
   scenario 'successfully' do

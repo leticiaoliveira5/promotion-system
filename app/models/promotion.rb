@@ -5,8 +5,8 @@ class Promotion < ApplicationRecord
   has_many :product_category_promotions
   has_many :product_categories, through: :product_category_promotions
 
-  validates :name, :code, :discount_rate, :coupon_quantity, :expiration_date, presence: true 
-  validates :code, uniqueness: true 
+  validates :name, :code, :discount_rate, :coupon_quantity, :expiration_date, presence: true
+  validates :code, uniqueness: true
 
   def generate_coupons!
     Coupon.transaction do
@@ -32,16 +32,17 @@ class Promotion < ApplicationRecord
     promotion_approval&.approved_at
 
     return nil unless promotion_approval
+
     promotion_approval.approved_at
   end
 
   def approver
     promotion_approval.user
   end
-  
+
   def self.search(search)
     if search
-      self.where("name LIKE ?","%#{search}%")
+      where('name LIKE ?', "%#{search}%")
       # sintaxe SQL para buscas no banco de dados
       # Like procura o texto independente da posição na string
     else

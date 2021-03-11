@@ -1,8 +1,5 @@
 class HomeController < ApplicationController
-  
-    def index
-    end
+  def index; end
 
-    def search
-    end
+  def search; end
 end
