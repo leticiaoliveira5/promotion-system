@@ -1,20 +1,16 @@
 require 'rails_helper'
 
 feature 'Admin registers a promotion' do
-
   scenario 'from index page' do
-
     user = create(:user)
     login_as user, scope: :user
     visit root_path
     click_on 'Promoções'
 
-    expect(page).to have_link('Registrar uma promoção', href: new_promotion_path)
-    
+    expect(page).to have_link('Registrar uma promoção', href: new_promotion_path)    
   end
 
   scenario 'successfully' do
-
     user = create(:user)
     login_as user, scope: :user
     visit root_path
@@ -38,11 +34,9 @@ feature 'Admin registers a promotion' do
     expect(page).to have_content('90')
     expect(page).to have_link('Voltar')
     expect(page).to have_content("Cadastrada por #{user.email}")
-
   end
 
   scenario 'and choose product categories' do
-
     user = create(:user)
     login_as user, scope: :user
 
@@ -67,10 +61,8 @@ feature 'Admin registers a promotion' do
     click_on 'Criar promoção'
 
     expect(current_path).to eq(promotion_path(Promotion.last))
-    expect(page).to have_content("Monitores")
-    expect(page).to have_content("Teclados")
-    expect(page).to have_content("Smartphones")
-
-
+    expect(page).to have_content('Monitores')
+    expect(page).to have_content('Teclados')
+    expect(page).to have_content('Smartphones')
   end
 end
