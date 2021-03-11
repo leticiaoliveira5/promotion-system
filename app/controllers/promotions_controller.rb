@@ -63,8 +63,8 @@ class PromotionsController < ApplicationController
 
   def approve
     promotion = Promotion.find(params[:id])
-    promotion.approve!(current_user)    
-    PromotionMailer.notify_approval([:id])
+    promotion.approve!(current_user)
+    PromotionMailer.notify_approval(promotion.id).deliver_now
     redirect_to promotion
   end
 end

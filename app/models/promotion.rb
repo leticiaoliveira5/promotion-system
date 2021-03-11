@@ -41,12 +41,11 @@ class Promotion < ApplicationRecord
   
   def self.search(search)
     if search
-        self.where("name LIKE ?","%#{search}%")
-        # sintaxe SQL para buscas no banco de dados
-        # Like procura o texto independente da posição na string
+      self.where("name LIKE ?","%#{search}%")
+      # sintaxe SQL para buscas no banco de dados
+      # Like procura o texto independente da posição na string
     else
-        @promotions = Promotion.all
+      @promotions = Promotion.all
     end
   end
- 
 end
